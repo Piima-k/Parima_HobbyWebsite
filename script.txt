@@ -1,0 +1,95 @@
+/* theme toggle, reset, nav active highlighting, year, form preview, slideshow */
+(function () {
+  // toggles
+  const toggles = document.querySelectorAll('.theme-toggle');
+  const resets = document.querySelectorAll('.reset-site');
+
+  // apply saved theme
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+
+  toggles.forEach(btn => btn.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    if (document.documentElement.classList.contains('dark')) localStorage.setItem('theme','dark');
+    else localStorage.removeItem('theme');
+  }));
+
+  resets.forEach(btn => btn.addEventListener('click', () => {
+    localStorage.removeItem('theme');
+    location.reload();
+  }));
+
+  // year
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // active nav
+  const navItems = document.querySelectorAll('.nav-item');
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  navItems.forEach(a => {
+    const href = a.getAttribute('href');
+    if (href === path) a.classList.add('active');
+  });
+
+  // range output sync
+  const range = document.querySelector('input[name="mood"]');
+  const moodOut = document.querySelector('output[name="moodOut"]');
+  if (range && moodOut) {
+    moodOut.textContent = range.value;
+    range.addEventListener('input', () => { moodOut.textContent = range.value; });
+  }
+
+  // form preview
+  window.showPreview = function showPreview() {
+    const form = document.getElementById('challenge-form') || document.querySelector('.contact-form');
+    if (!form) return;
+    const data = new FormData(form);
+    const preview = document.getElementById('preview');
+    const body = document.getElementById('preview-body');
+    if (!preview || !body) return;
+    const sample = data.get('sample');
+    const sampleName = sample && sample.name ? sample.name : '—';
+    body.innerHTML = `
+      <p><strong>Name:</strong> ${escapeHtml(data.get('name') || '—')}</p>
+      <p><strong>Email:</strong> ${escapeHtml(data.get('email') || '—')}</p>
+      <p><strong>Contact date:</strong> ${escapeHtml(data.get('date') || '—')}</p>
+      <p><strong>Contact time:</strong> ${escapeHtml(data.get('time') || '—')}</p>
+      <p><strong>Favorite color:</strong> <span style="display:inline-block;width:18px;height:18px;border:1px solid #ccc;background:${escapeHtml(data.get('favcolor')||'#fff')};vertical-align:middle;margin-right:8px"></span> ${escapeHtml(data.get('favcolor') || '—')}</p>
+      <p><strong>Enthusiasm:</strong> ${escapeHtml(data.get('mood') || '—')}/10</p>
+      <p><strong>Hours/week:</strong> ${escapeHtml(data.get('hours') || '—')}</p>
+      <p><strong>Preferred medium:</strong> ${escapeHtml(data.get('medium') || '—')}</p>
+      <p><strong>Subscribe:</strong> ${data.get('subscribe') ? 'Yes' : 'No'}</p>
+      <p><strong>Attachment:</strong> ${escapeHtml(sampleName)}</p>
+      <p><strong>Message:</strong> ${escapeHtml(data.get('message') || '—')}</p>
+    `;
+    preview.hidden = false;
+    preview.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'",'&#39;');
+  }
+
+  /* --- slideshow (right column) --- */
+  (function initSlideshow(){
+    const slides = document.querySelectorAll('.slideshow img');
+    if (!slides || slides.length === 0) return;
+    let idx = 0;
+    slides.forEach((s,i)=> s.style.opacity = (i===0? '1':'0'));
+    setInterval(()=>{
+      slides[idx].classList.remove('active');
+      slides[idx].style.opacity = '0';
+      idx = (idx+1) % slides.length;
+      slides[idx].classList.add('active');
+      slides[idx].style.opacity = '1';
+    }, 3200);
+  })();
+
+})();

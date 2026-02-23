@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Extra — Contact & Challenge Form</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  
+  <div id="chat-widget" >
+  <div id="chat-toggle">💬</div>
+  <div class="chat-header">
+    <span>ParimaGPT 💖</span>
+    <button id="close-chat">✕</button>
+  </div>
+
+  <div id="chat-box" class="chat-box"></div>
+
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder=ask me something! minigame is in HERE btw" />
+    <button id="send-btn">➤</button>
+  </div>
+</div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="title-wrap">
+        <h1 class="site-title">Contact me !</h1>
+        <p class="site-sub">Contact, gallery placeholder & form</p>
+      </div>
+
+    <nav class="navbar container">
+      <a class="nav-item" href="index.html">Home</a>
+      <a class="nav-item" href="hobby1.html">Drawing</a>
+      <a class="nav-item" href="hobby2.html">listening to music</a>
+      <a class="nav-item" href="hobby3.html">Game</a>
+      <a class="nav-item" href="extra.html">contact !</a>
+    </nav>
+  </header>
+
+  <div class="container page-layout">
+    <main>
+      <section class="card">
+        <h2 class="accent-heading">Blank space — add anything!</h2>
+        <p>Use this area for a gallery, project log, goals page, or other notes. Below is a challenge form demonstrating date, color and range input types plus more — design only (no backend).</p>
+      </section>
+
+      <section class="card">
+        <h2 class="accent-heading">Contact & Feedback (Design only)</h2>
+
+        <form class="contact-form" id="challenge-form" onsubmit="event.preventDefault(); showPreview();">
+          <label>Your name <input type="text" name="name" required></label>
+          <label>Email <input type="email" name="email" required></label>
+          <label>Preferred contact date <input type="date" name="date"></label>
+          <label>Preferred contact time <input type="time" name="time"></label>
+          <label>Favorite color <input type="color" name="favcolor" value="#ffd6e0"></label>
+          <label>Enthusiasm level <input type="range" name="mood" min="0" max="10" step="1" value="7"><output name="moodOut">7</output></label>
+          <label>Hours per week <input type="number" name="hours" min="0" max="100" value="3"></label>
+          <label>Preferred medium
+            <select name="medium">
+              <option value="">Choose...</option>
+              <option value="traditional">Traditional</option>
+              <option value="digital">Digital</option>
+              <option value="both">Both</option>
+            </select>
+          </label>
+          <label>Subscribe <input type="checkbox" name="subscribe"></label>
+          <label>Attach a sample (optional) <input type="file" name="sample" accept="image/*"></label>
+          <label>Message <textarea name="message" rows="4"></textarea></label>
+
+          <div style="display:flex;gap:10px;margin-top:8px">
+            <button class="btn" type="submit">Preview (no submit)</button>
+            <a class="btn-ghost" href="index.html">Back Home</a>
+          </div>
+        </form>
+
+        <div id="preview" class="preview card" hidden>
+          <h3>Form preview</h3>
+          <div id="preview-body"></div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="side-column">
+      <h3>Mini Game — Rock Paper Scissors !</h3>
+
+<div class="card" id="rps-game">
+  <p id="game-message">Press Start to play!</p>
+
+  <div class="game-buttons">
+    <button class="btn choice" data-choice="rock">🪨 Rock</button>
+    <button class="btn choice" data-choice="paper">📄 Paper</button>
+    <button class="btn choice" data-choice="scissors">✂️ Scissors</button>
+  </div>
+
+  <p>Score: <span id="player-score">0</span> — <span id="computer-score">0</span></p>
+
+  <div style="margin-top:10px;">
+    <button class="btn" id="start-game">Start</button>
+    <button class="btn btn-ghost" id="reset-game">Reset</button>
+  </div>
+</div>
+      <div class="card side-card"><h4 class="accent-heading">°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･</h4><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDNsd3NhMW05NGdoMjl3ODViOHphNHh2aWdkOWszeXl6eTRhZXNyciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/M7Rr8dZTaGxKVtYNg4/giphy.gif" alt="gif"></div>
+      <div class="card side-card"><h4 class="accent-heading">Note</h4><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDNsd3NhMW05NGdoMjl3ODViOHphNHh2aWdkOWszeXl6eTRhZXNyciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/j28ZtYb5wkrwMagOQj/giphy.gif" alt="gif2"></div>
+      <div class="card side-card"><h4 class="accent-heading">Slideshow</h4>
+        <div class="slideshow"><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3J4ZjhkbW5zNnd0YWR6d2FjaXFuNmRvNWR4cG5qaHd3d2M3M3JpMSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/4tRuAGHGDDzBgdaLpg/giphy.gif" class="active">
+  </div>
+
+ <div><footer class="site-footer container">
+    <p>Made with ♥ — Parima Kuratchatchaval</p>
+  </footer>
+ </div>
+
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
